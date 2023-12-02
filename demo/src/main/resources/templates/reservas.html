@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservas - Hotel Andes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- Incluir Navbar -->
+    <div th:replace="navbar :: navbar"></div>
+
+    <div class="container mt-4">
+        <h2>Reservas</h2>
+        <a href="/crearReserva" class="btn btn-primary mb-3">Crear Nueva Reserva</a>
+
+        <!-- Lista de Reservas -->
+        <div th:each="reserva : ${reservas}" class="card mb-2">
+            <div class="card-body">
+                <h5 class="card-title" th:text="'Reserva ID: ' + ${reserva.id}">ID de Reserva</h5>
+                <p class="card-text">
+                    Fecha de llegada: <span th:text="${reserva.fechaLlegada}">Fecha de llegada</span><br>
+                    Fecha de salida: <span th:text="${reserva.fechaSalida}">Fecha de salida</span><br>
+                    Tipo de Habitación: <span th:text="${reserva.tipoHabitacion.nombre}">Tipo de Habitación</span><br>
+                    Titular: <span th:text="${reserva.titular}">Titular</span>
+                </p>
+                <a th:href="@{/editarReserva(id=${reserva.id})}" class="btn btn-secondary">Editar</a>
+                <form th:action="@{/eliminarReserva}" method="post" style="display:inline;">
+                    <input type="hidden" th:value="${reserva.id}" name="id"/>
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.9/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
