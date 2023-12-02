@@ -24,7 +24,7 @@
 
             <div class="form-group">
                 <label for="tipoHabitacion">Tipo de Habitación:</label>
-                <select id="tipoHabitacion" name="tipoHabitacion" th:field="*{tipoHabitacion}" required class="form-control">
+                <select id="tipoHabitacion" name="tipoHabitacion.id" required class="form-control">
                     <option th:each="tipoHab : ${tiposHabitacion}"
                             th:value="${tipoHab.id}"
                             th:text="${tipoHab.nombre}">

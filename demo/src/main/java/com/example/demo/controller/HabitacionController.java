@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.modelo.Habitacion;
+import com.example.demo.modelo.TipoHabitacion;
 import com.example.demo.repositorio.HabitacionRepository;
 import com.example.demo.repositorio.TipoHabitacionRepository;
 
@@ -41,6 +42,9 @@ public class HabitacionController {
 
     @PostMapping("/guardarHabitacion")
     public String guardarHabitacion(@ModelAttribute("habitacion") Habitacion habitacion) {
+        TipoHabitacion tipoHabitacion = tipoHabitacionRepository.findById(habitacion.getTipoHabitacion().getId())
+                                      .orElseThrow(() -> new IllegalArgumentException("Tipo de Habitación inválido"));
+        habitacion.setTipoHabitacion(tipoHabitacion);
         habitacionRepository.save(habitacion);
         return "redirect:/habitaciones";
     }
