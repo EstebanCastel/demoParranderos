@@ -12,13 +12,16 @@
 
     <div class="container mt-4">
         <h2>Habitaciones</h2>
-
         <a href="/crearHabitacion" class="btn btn-primary mb-3">Crear Nueva Habitación</a>
 
+        <!-- Lista de Habitaciones -->
         <div th:each="habitacion : ${habitaciones}" class="card mb-4">
             <div class="card-body">
-                <h5 class="card-title" th:text="${habitacion.tipoHabitacion.nombre}">Nombre del Tipo de Habitación</h5>
+                <!-- Título de la tarjeta con el ID de la habitación -->
+                <h5 class="card-title" th:text="${habitacion.id}">ID de la Habitación</h5>
                 <p class="card-text">Costo: <span th:text="${habitacion.costo}">Costo</span></p>
+                
+                <!-- Tarjeta embebida con detalles del Tipo de Habitación -->
                 <div class="card mt-3">
                     <div class="card-body">
                         <h6 class="card-subtitle mb-2 text-muted">Detalles del Tipo de Habitación</h6>
@@ -38,8 +41,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

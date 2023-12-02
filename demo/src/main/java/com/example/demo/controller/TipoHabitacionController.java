@@ -10,12 +10,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.modelo.TipoHabitacion;
 import com.example.demo.repositorio.TipoHabitacionRepository;
+import com.example.demo.service.SequenceGeneratorService;
 
 @Controller
 public class TipoHabitacionController {
 
     @Autowired
     private TipoHabitacionRepository tipoHabitacionRepository;
+
+    @Autowired
+    private SequenceGeneratorService sequenceGenerator;
 
     @GetMapping("/tiposHabitacion")
     public String obtenerTodosLosTiposHabitacion(Model model) {
@@ -37,6 +41,9 @@ public class TipoHabitacionController {
 
     @PostMapping("/guardarTipoHabitacion")
     public String guardarTipoHabitacion(@ModelAttribute("tipoHabitacion") TipoHabitacion tipoHabitacion) {
+        if (tipoHabitacion.getId() == null || tipoHabitacion.getId().isEmpty()) {
+            tipoHabitacion.setId(String.valueOf(sequenceGenerator.generateSequence(TipoHabitacion.SEQUENCE_NAME)));
+        }
         tipoHabitacionRepository.save(tipoHabitacion);
         return "redirect:/tiposHabitacion";
     }

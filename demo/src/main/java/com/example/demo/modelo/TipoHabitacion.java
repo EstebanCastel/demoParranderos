@@ -11,6 +11,8 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Document(collection = "tipoHabitacion")
 public class TipoHabitacion {
 
+    public static final String SEQUENCE_NAME = "tipo_habitaciones_sequence";
+
     @Id
     private String id;
 
