@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tipos de Habitaciones - Hotel Andes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- Incluir Navbar -->
+    <div th:replace="navbar :: navbar"></div>
+
+    <div class="container mt-4">
+        <h2>Tipos de Habitaciones</h2>
+
+        <a href="/crearTipoHabitacion" class="btn btn-primary mb-3">Crear Nuevo Tipo Habitación</a>
+
+        <!-- Lista de Tipos de Habitaciones -->
+        <div th:each="tipoHabitacion : ${tiposHabitacion}">
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${tipoHabitacion.nombre}">Nombre de la Habitación</h5>
+                    <p class="card-text">
+                        Capacidad: <span th:text="${tipoHabitacion.capacidad}">Capacidad</span><br>
+                        Dotación: <span th:text="${tipoHabitacion.dotacion}">Dotación</span>
+                    </p>
+                    <form th:action="@{/eliminarTipoHabitacion}" method="post">
+                        <input type="hidden" th:value="${tipoHabitacion.id}" name="id"/>
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+                    <a th:href="@{/editarTipoHabitacion(id=${tipoHabitacion.id})}" class="btn btn-secondary">Editar</a>
+                </div>
+            </div>
+        </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.9/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

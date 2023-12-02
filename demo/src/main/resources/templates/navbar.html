@@ -1,3 +1,5 @@
+
+
 <!-- navbar.html -->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
@@ -12,7 +14,7 @@
         }
 
         nav {
-            background-color: #333;
+            background-color: #007bff;
             overflow: hidden;
             position: sticky;
             top: 0;
@@ -58,7 +60,7 @@
                 }
         
                 nav {
-                    background-color: #333;
+                    background-color: #007bff;
                     overflow: hidden;
                     position: sticky;
                     top: 0;
@@ -79,7 +81,7 @@
         
                 nav a:hover {
                     background-color: #ddd;
-                    color: black;
+                    color: rgb(0, 0, 0);
                 }
         
                 @media screen and (max-width: 800px) {
@@ -94,11 +96,9 @@
 
             </style>
 
-            <a th:href="@{/}" style="margin-left: 10px;">Parranderos</a>
+            <a th:href="@{/}" style="margin-left: 10px;">Hotel Andes</a>
             <div style="margin-left: 1000px;">
-                <a th:href="@{/bebidas}">Bebidas</a>
-                <a th:href="@{/tipoBebidas}">Tipo Bebidas</a>
-                <a th:href="@{/bt}">Bebidas Tipos</a>
+                <a th:href="@{/tiposHabitacion}">Tipos de Habitación</a>
             </div>
         </nav>
     </div>

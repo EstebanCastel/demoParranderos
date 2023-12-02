@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${tipoHabitacion.id != null} ? 'Editar Tipo de Habitación' : 'Crear Tipo de Habitación'">Formulario de Tipo de Habitación</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- Incluir Navbar -->
+    <div th:replace="navbar :: navbar"></div>
+
+    <div class="container mt-4">
+        <h2 th:text="${tipoHabitacion.id != null} ? 'Editar Tipo de Habitación' : 'Crear Nuevo Tipo de Habitación'"></h2>
+        
+        <form th:action="@{/guardarTipoHabitacion}" th:object="${tipoHabitacion}" method="post">
+            <!-- Campo oculto para ID (solo necesario en modo edición) -->
+            <input type="hidden" th:field="*{id}" />
+
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" th:field="*{nombre}" required class="form-control"/>
+            </div>
+
+            <div class="form-group">
+                <label for="capacidad">Capacidad:</label>
+                <input type="number" id="capacidad" name="capacidad" th:field="*{capacidad}" required class="form-control"/>
+            </div>
+
+            <div class="form-group">
+                <label for="dotacion">Dotación:</label>
+                <input type="text" id="dotacion" name="dotacion" th:field="*{dotacion}" required class="form-control"/>
+            </div>
+
+            <!-- Botón que cambia de texto dependiendo de si estás creando o editando -->
+            <button type="submit" class="btn btn-success" th:text="${tipoHabitacion.id != null} ? 'Actualizar' : 'Crear'">Enviar</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.9/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
