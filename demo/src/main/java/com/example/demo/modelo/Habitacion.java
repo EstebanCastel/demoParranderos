@@ -7,10 +7,13 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+
 @Getter
 @Setter
 @Document(collection = "habitacion")
 public class Habitacion {
+
+    public static final String SEQUENCE_NAME = "habitaciones_sequence"; // Agrega esta línea
 
     @Id
     private String id;

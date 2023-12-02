@@ -12,6 +12,7 @@ import com.example.demo.modelo.Habitacion;
 import com.example.demo.modelo.TipoHabitacion;
 import com.example.demo.repositorio.HabitacionRepository;
 import com.example.demo.repositorio.TipoHabitacionRepository;
+import com.example.demo.service.SequenceGeneratorService;
 
 @Controller
 public class HabitacionController {
@@ -20,6 +21,8 @@ public class HabitacionController {
     private HabitacionRepository habitacionRepository;
     @Autowired
     private TipoHabitacionRepository tipoHabitacionRepository;
+    @Autowired
+    private SequenceGeneratorService sequenceGenerator;
 
     @GetMapping("/habitaciones")
     public String obtenerTodasLasHabitaciones(Model model) {
@@ -42,9 +45,15 @@ public class HabitacionController {
 
     @PostMapping("/guardarHabitacion")
     public String guardarHabitacion(@ModelAttribute("habitacion") Habitacion habitacion) {
+        if (habitacion.getId() == null || habitacion.getId().isEmpty()) {
+            // Genera un nuevo ID solo si es una nueva habitación
+            habitacion.setId(String.valueOf(sequenceGenerator.generateSequence(Habitacion.SEQUENCE_NAME)));
+        }
+        // Busca y establece el tipo de habitación
         TipoHabitacion tipoHabitacion = tipoHabitacionRepository.findById(habitacion.getTipoHabitacion().getId())
                                       .orElseThrow(() -> new IllegalArgumentException("Tipo de Habitación inválido"));
         habitacion.setTipoHabitacion(tipoHabitacion);
+        // Guarda la habitación
         habitacionRepository.save(habitacion);
         return "redirect:/habitaciones";
     }
