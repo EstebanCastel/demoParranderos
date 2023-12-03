@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${tipoHabitacion.id != null} ? 'Editar Tipo de Habitación' : 'Crear Tipo de Habitación'">Formulario de Tipo de Habitación</title>
+    <title th:text="${estadia.id != null} ? 'Editar Estadía' : 'Crear Estadía'">Formulario de Estadía</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
@@ -11,29 +11,49 @@
     <div th:replace="navbar :: navbar"></div>
 
     <div class="container mt-4">
-        <h2 th:text="${tipoHabitacion.id != null} ? 'Editar Tipo de Habitación' : 'Crear Nuevo Tipo de Habitación'"></h2>
+        <h2 th:text="${estadia.id != null} ? 'Editar Estadía' : 'Crear Nueva Estadía'"></h2>
         
-        <form th:action="@{/guardarTipoHabitacion}" th:object="${tipoHabitacion}" method="post">
+        <form th:action="@{/guardarEstadia}" th:object="${estadia}" method="post">
             <!-- Campo oculto para ID (solo necesario en modo edición) -->
             <input type="hidden" th:field="*{id}" />
 
             <div class="form-group">
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" th:field="*{nombre}" required class="form-control"/>
+                <label for="fechaCheckIn">Fecha de Check-In:</label>
+                <input type="date" id="fechaCheckIn" name="fechaCheckIn" th:field="*{fechaCheckIn}" required class="form-control"/>
             </div>
 
             <div class="form-group">
-                <label for="capacidad">Capacidad:</label>
-                <input type="number" id="capacidad" name="capacidad" th:field="*{capacidad}" required class="form-control"/>
+                <label for="fechaCheckOut">Fecha de Check-Out:</label>
+                <input type="date" id="fechaCheckOut" name="fechaCheckOut" th:field="*{fechaCheckOut}" required class="form-control"/>
             </div>
 
             <div class="form-group">
-                <label for="dotacion">Dotación:</label>
-                <input type="text" id="dotacion" name="dotacion" th:field="*{dotacion}" required class="form-control"/>
+                <div class="form-check">
+                    <input type="checkbox" id="checkInRealizado" name="checkInRealizado" th:field="*{checkInRealizado}" class="form-check-input"/>
+                    <label class="form-check-label" for="checkInRealizado">Check-In Realizado</label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="form-check">
+                    <input type="checkbox" id="checkOutRealizado" name="checkOutRealizado" th:field="*{checkOutRealizado}" class="form-check-input"/>
+                    <label class="form-check-label" for="checkOutRealizado">Check-Out Realizado</label>
+                </div>
+            </div>
+            
+
+            <div class="form-group">
+                <label for="reserva">Reserva:</label>
+                <select id="reserva" name="reserva" th:field="*{reserva}" required class="form-control">
+                    <option th:each="reserva : ${reservas}"
+                            th:value="${reserva.id}"
+                            th:text="${reserva.id}">
+                    </option>
+                </select>
             </div>
 
             <!-- Botón que cambia de texto dependiendo de si estás creando o editando -->
-            <button type="submit" class="btn btn-success" th:text="${tipoHabitacion.id != null} ? 'Actualizar' : 'Crear'">Enviar</button>
+            <button type="submit" class="btn btn-success" th:text="${estadia.id != null} ? 'Actualizar' : 'Crear'">Enviar</button>
         </form>
     </div>
 
