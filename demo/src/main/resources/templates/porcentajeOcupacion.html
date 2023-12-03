@@ -22,7 +22,7 @@
             <tbody>
                 <tr th:each="ocupacion : ${porcentajeOcupacion}">
                     <td th:text="${ocupacion.habitacionId}"></td>
-                    <td th:text="${#numbers.formatDecimal(ocupacion.porcentajeOcupacion, 2)}"></td>
+                    <td th:text="${ocupacion.porcentajeOcupacion}"></td>
                 </tr>
             </tbody>
         </table>
