@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadias - Hotel Andes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- Incluir Navbar -->
+    <div th:replace="navbar :: navbar"></div>
+
+    <div class="container mt-4">
+        <h2>Estadias</h2>
+        <a href="/crearEstadia" class="btn btn-primary mb-3">Crear Nueva Estadia</a>
+
+        <!-- Lista de Estadias -->
+        <div th:each="estadia : ${listaEstadias}" class="card mb-2">
+            <div class="card-body">
+                <h5 class="card-title" th:text="'Estadia ID: ' + ${estadia.id}">ID de Estadia</h5>
+                <p class="card-text">
+                    Fecha de Check-In: <span th:text="${estadia.fechaCheckIn}">Fecha Check-In</span><br>
+                    Fecha de Check-Out: <span th:text="${estadia.fechaCheckOut}">Fecha Check-Out</span><br>
+                    Check-In Realizado: <span th:text="${estadia.checkInRealizado} ? 'Sí' : 'No'">Estado Check-In</span><br>
+                    Check-Out Realizado: <span th:text="${estadia.checkOutRealizado} ? 'Sí' : 'No'">Estado Check-Out</span><br>
+                    ID de Reserva: <span th:text="${estadia.reserva.id}">ID Reserva</span>
+                </p>
+                <a th:href="@{/editarEstadia(id=${estadia.id})}" class="btn btn-secondary">Editar</a>
+                <form th:action="@{/eliminarEstadia}" method="post" style="display:inline;">
+                    <input type="hidden" th:value="${estadia.id}" name="id"/>
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.9/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
