@@ -1,6 +1,10 @@
 package com.example.demo.controller;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +26,8 @@ public class ReservaController {
     private SequenceGeneratorService sequenceGenerator;
     @Autowired
     private HabitacionRepository habitacionRepository;
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     @GetMapping("/reservas")
     public String obtenerTodasLasReservas(Model model) {
@@ -57,6 +63,22 @@ public class ReservaController {
     public String eliminarReserva(@RequestParam(name = "id") String id) {
         reservaRepository.deleteById(id);
         return "redirect:/reservas";
+    }
+
+    @GetMapping("/porcentajeOcupacion")
+    public String obtenerPorcentajeOcupacion(Model model) {
+        Calendar calendar = Calendar.getInstance();
+
+        // Establecer fecha de inicio (1 de enero de 2023)
+        calendar.set(2023, Calendar.JANUARY, 1, 0, 0, 0);
+        Date fechaInicio = calendar.getTime();
+
+        // Establecer fecha de fin (31 de diciembre de 2023)
+        calendar.set(2023, Calendar.DECEMBER, 31, 23, 59, 59);
+        Date fechaFin = calendar.getTime();
+
+        model.addAttribute("porcentajeOcupacion", reservaRepository.calcularPorcentajeOcupacion(mongoTemplate, fechaInicio, fechaFin));
+        return "porcentajeOcupacion"; // Reemplaza con el nombre de tu archivo HTML
     }
 }
 
