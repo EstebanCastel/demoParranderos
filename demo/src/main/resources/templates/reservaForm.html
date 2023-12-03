@@ -42,6 +42,16 @@
                 </select>
             </div>
 
+            <div class="form-group">
+                <label for="habitacion">Habitación:</label>
+                <select id="habitacion" name="habitacion" th:field="*{habitacion}" required class="form-control">
+                    <option th:each="hab : ${habitaciones}"
+                            th:value="${hab.id}"
+                            th:text="'Habitación ' + ${hab.id}">
+                    </option>
+                </select>
+            </div>
+
             <!-- Botón que cambia de texto dependiendo de si estás creando o editando -->
             <button type="submit" class="btn btn-success" th:text="${reserva.id != null} ? 'Actualizar' : 'Crear'">Enviar</button>
         </form>

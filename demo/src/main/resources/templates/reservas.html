@@ -22,6 +22,7 @@
                     Fecha de llegada: <span th:text="${reserva.fechaLlegada}">Fecha de llegada</span><br>
                     Fecha de salida: <span th:text="${reserva.fechaSalida}">Fecha de salida</span><br>
                     Tipo de Habitación: <span th:text="${reserva.tipoHabitacion.nombre}">Tipo de Habitación</span><br>
+                    Habitación: <span th:text="${reserva.habitacion.id}">ID de Habitación</span><br>
                     Titular: <span th:text="${reserva.titular}">Titular</span>
                 </p>
                 <a th:href="@{/editarReserva(id=${reserva.id})}" class="btn btn-secondary">Editar</a>

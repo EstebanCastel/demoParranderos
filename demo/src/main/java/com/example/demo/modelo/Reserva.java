@@ -27,5 +27,8 @@ public class Reserva {
 
     private String titular;
 
+    @DBRef
+    private Habitacion habitacion;
+
 
 }

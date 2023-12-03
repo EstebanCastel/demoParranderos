@@ -1,13 +1,12 @@
 package com.example.demo.controller;
 
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.modelo.Reserva;
-import com.example.demo.modelo.TipoHabitacion;
+import com.example.demo.repositorio.HabitacionRepository;
 import com.example.demo.repositorio.ReservaRepository;
 import com.example.demo.repositorio.TipoHabitacionRepository;
 import com.example.demo.service.SequenceGeneratorService;
@@ -21,6 +20,8 @@ public class ReservaController {
     private TipoHabitacionRepository tipoHabitacionRepository;
     @Autowired
     private SequenceGeneratorService sequenceGenerator;
+    @Autowired
+    private HabitacionRepository habitacionRepository;
 
     @GetMapping("/reservas")
     public String obtenerTodasLasReservas(Model model) {
@@ -38,6 +39,7 @@ public class ReservaController {
         }
         model.addAttribute("reserva", reserva);
         model.addAttribute("tiposHabitacion", tipoHabitacionRepository.findAll());
+        model.addAttribute("habitaciones", habitacionRepository.findAll()); // Añadir lista de habitaciones al modelo
         return "reservaForm";
     }
 
