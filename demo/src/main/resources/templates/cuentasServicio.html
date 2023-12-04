@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuentas de Servicio</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <!-- Incluir Navbar -->
+    <div th:replace="navbar :: navbar"></div>
+
+    <div class="container mt-3">
+        <h1>Cuentas de Servicio</h1>
+        <a th:href="@{/cuentasServicioForm}" class="btn btn-primary" style="margin-bottom: 38px;">Crear Nueva Cuenta de
+            Servicio</a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Descripción</th>
+                    <th>Fecha</th>
+                    <th>Reserva ID</th>
+                    <th>Servicio ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Iterating over the list of cuentasServicio and displaying the details -->
+                <tr th:each="cuentaServicio : ${cuentasServicio}">
+                    <td th:text="${cuentaServicio.id}"></td>
+                    <td th:text="${cuentaServicio.descripcion}"></td>
+                    <td th:text="${cuentaServicio.fecha}"></td>
+                    <td th:text="${cuentaServicio.reservaId}"></td>
+                    <td th:text="${cuentaServicio.servicioId}"></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- Button to redirect to the cuentasServicio creation form -->
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.9/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

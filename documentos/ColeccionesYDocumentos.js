@@ -57,6 +57,78 @@ db.tipoHabitacion.insertOne({
 })
 
 
+// Crear índices para Servicios/Productos
+db.servicioProducto.createIndex({ nombre: 1 });
+db.servicioProducto.createIndex({ esProducto: 1 });
+
+db.createCollection("hotel", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["nombre", "habitaciones", "serviciosProductos"],
+            properties: {
+                nombre: {
+                    bsonType: "string",
+                    description: "Nombre del hotel"
+                },
+                habitaciones: {
+                    bsonType: "array",
+                    description: "Lista de habitaciones en el hotel",
+                    items: {
+                        bsonType: "object",
+                        required: ["id", "descripcion", "tipoHabitacionId"],
+                        properties: {
+                            id: {
+                                bsonType: "int",
+                                description: "ID único de la habitación"
+                            },
+                            descripcion: {
+                                bsonType: "string",
+                                description: "Descripción de la habitación"
+                            },
+                            tipoHabitacionId: {
+                                bsonType: "objectId",
+                                description: "Referencia al tipo de habitación"
+                            }
+                        }
+                    }
+                },
+                serviciosProductos: {
+                    bsonType: "array",
+                    items: {
+                        bsonType: "objectId",
+                        description: "Referencia a servicios o productos"
+                    }
+                }
+            }
+        }
+    }
+});
+
+db.createCollection("cuentaServicio", {
+  validator: {
+      $jsonSchema: {
+          bsonType: "object",
+          required: ["descripcion", "fecha", "reservaId", "servicioId"],
+          properties: {
+              descripcion: {
+                  bsonType: "string"
+              },
+              fecha: {
+                  bsonType: "date"
+              },
+              reservaId: {
+                  bsonType: "objectId",
+                  description: "Referencia a la reserva"
+              },
+              servicioId: {
+                  bsonType: "objectId",
+                  description: "Referencia al servicio o producto"
+              }
+          }
+      }
+  }
+});
 
 
 db.createCollection("habitacion")
@@ -153,6 +225,7 @@ db.estadia.insertOne({
       }
     }
   ]);
+  
   
   
   

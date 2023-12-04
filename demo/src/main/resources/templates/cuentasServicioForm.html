@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Crear Cuenta de Servicio</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+
+<body>
+        <!-- Incluir Navbar -->
+        <div th:replace="navbar :: navbar"></div>
+
+    <br>
+    <!-- Form for creating a new cuentaServicio -->
+    <form th:action="@{/crearCuentaServicio}" method="post">
+        <div class="form-group">
+            <label for="descripcion">Descripción:</label>
+            <input type="text" class="form-control" id="descripcion" placeholder="Descripción" name="descripcion" />
+        </div>
+        <div class="form-group">
+            <label for="fecha">Fecha:</label>
+            <input type="date" class="form-control" id="fecha" name="fecha" />
+        </div>
+        <div class="form-group">
+            <label for="reservaId">Reserva ID:</label>
+            <input type="text" class="form-control" id="reservaId" placeholder="Reserva ID" name="reservaId" />
+        </div>
+        <div class="form-group">
+            <label for="servicioId">Servicio ID:</label>
+            <input type="text" class="form-control" id="servicioId" placeholder="Servicio ID" name="servicioId" />
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a th:href="@{/cuentasServicio}" class="btn btn-primary">Cancelar</a>
+    </form>
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.9/dist/umd/popper.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
