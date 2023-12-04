@@ -50,12 +50,30 @@ db.tipoHabitacion.insertOne({
   "dotacion": "Cama King, Baño con Jacuzzi, Vista al mar"
 })
 
+db.tipoHabitacion.insertOne({
+  "_id": "2",
+  "nombre": "Habitación Estándar"
+  // Falta 'capacidad' y 'dotacion'
+})
+
+
+
+
 db.createCollection("habitacion")
 db.habitacion.insertOne({
     "_id": "1",
     "costo": 250,
     "tipoHabitacion": db.tipoHabitacion.findOne({ "_id": "1" })
 })
+
+
+db.habitacion.insertOne({
+  "_id": "2",
+  "costo": 150,
+  "tipoHabitacion": { "nombre": "Habitación no existente" }
+  // 'tipoHabitacion' debe ser una referencia válida a un documento en la colección 'tipoHabitacion'
+})
+
 
 db.createCollection("reserva")
 db.reserva.insertOne({
@@ -65,6 +83,15 @@ db.reserva.insertOne({
     "tipoHabitacion": db.tipoHabitacion.findOne({ "_id": "1" }),
     "titular": "Juan Pérez",
     "habitacion": db.habitacion.findOne({ "_id": "3" })
+})
+
+db.reserva.insertOne({
+  "_id": "4",
+  "fechaLlegada": ISODate("2023-12-15T00:00:00Z"),
+  "fechaSalida": ISODate("2023-12-20T00:00:00Z"),
+  "tipoHabitacion": db.tipoHabitacion.findOne({ "_id": "1" }),
+  "titular": "Ana Gómez",
+  "habitacion": db.habitacion.findOne({ "_id": "99" }) // Esta habitación no existe
 })
 
 
@@ -78,6 +105,14 @@ db.estadia.insertOne({
   "reserva": db.reserva.findOne({ "_id": "3" })
 })
 
+db.estadia.insertOne({
+  "_id": "2",
+  "fechaCheckIn": ISODate("2024-02-01T00:00:00Z"),
+  "fechaCheckOut": ISODate("2024-02-07T00:00:00Z"),
+  "checkInRealizado": false,
+  "checkOutRealizado": false,
+  "reserva": db.reserva.findOne({ "_id": "99" }) // Esta reserva no existe
+})
 
 
   
